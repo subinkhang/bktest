@@ -1,0 +1,76 @@
+@startuml
+
+entity Customer {
+	-id: ObjectID <<generated>>
+	--
+	~cartId: ObjectID
+	--
+	password: string
+	email: string
+	name: string
+	address: string
+	phone: string
+	gender: string
+	' role: "user" | "admin"
+}
+
+entity Agency {
+	-id: ObjectID <<generated>>
+	--
+	~adminId: ObjectID
+	~productId: ObjectID
+	--
+	name: string
+	email: string
+	address: string
+	phone: string
+}
+
+entity Admin {
+	-id: ObjectID <<generated>>
+	--
+	~agencyId: ObjectID
+	--
+	name: string
+	email: string
+	address: string
+	' role: "user" | "admin"
+}
+
+entity Transaction {
+	-id: ObjectID <<generated>>
+	--
+	~agencyId: ObjectID
+	~customerId: ObjectID
+	~productId: ObjectID
+}
+
+entity Product {
+	-id: ObjectID <<generated>>
+	--
+	~agencyId: ObjectID
+	--
+	name: string
+	description: string
+	price: number
+}
+
+entity Cart {
+	-id: ObjectID <<generated>>
+	--
+	~customerId: ObjectID
+	~productId: ObjectID
+}
+
+
+Customer||--o{Transaction
+Agency||--o{Transaction
+Transaction}o--o{Product
+Agency||--o{Product
+Agency}o--o{Admin
+Customer||--||Cart
+Product}o--o{Cart
+
+
+
+@enduml

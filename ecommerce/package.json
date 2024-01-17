@@ -1,0 +1,8 @@
+{
+    "name": "ecommerce",
+    "version": "1.0.0",
+    "dependencies": {
+        "loopback": "^4.2.0"
+    }
+}
+  
