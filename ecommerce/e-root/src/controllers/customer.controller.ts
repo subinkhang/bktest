@@ -19,6 +19,9 @@ import {
 } from '@loopback/rest';
 import {Customer} from '../models';
 import {CustomerRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
+// ------------------------------------
+@authenticate('jwt') 
 
 export class CustomerController {
   constructor(

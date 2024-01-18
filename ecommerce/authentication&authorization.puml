@@ -1,0 +1,36 @@
+@startuml
+
+title Authentication and authorization solution
+
+participant user as User
+participant browser as Browser
+participant ecommerce_app as App
+participant Authentication_server as AuthServer
+participant Authorization_server as AuthzServer
+participant database as DB
+
+User -> Browser: Enter name and password
+
+Browser -> App: Send login request
+
+App -> AuthServer: Forward requests
+
+AuthServer -> App: Returns the authentication token if valid
+
+App -> Browser: Save the authentication token to local storage
+
+Browser -> App: Perform actions that require access
+
+App -> AuthzServer: Send authorization request
+
+AuthzServer -> DB: Retrieve access information
+
+DB -> AuthzServer: Returns information
+
+AuthzServer -> App: Check authentication token and permissions, return results
+
+App -> Browser: Perform required action
+
+
+@enduml
+
