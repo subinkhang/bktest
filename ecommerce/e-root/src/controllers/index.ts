@@ -21,3 +21,4 @@ export * from './customer-cart.controller';
 export * from './admin-agency.controller';
 export * from './agency-admin.controller';
 export * from './cart.controller';
+export * from './user.controller';

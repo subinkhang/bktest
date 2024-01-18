@@ -4,11 +4,13 @@
     "Agency": 7,
     "Admin": 9,
     "Transaction": 3,
-    "Cart": 1
+    "Cart": 1,
+    "User": 2,
+    "UserCredentials": 2
   },
   "models": {
     "Customer": {
-      "1": "{\"password\":\"customer111\",\"name\":\"MWAHAHAHAHAHAHAHAHAHAH\",\"email\":\"saigon111@.com\",\"address\":\"saigon\",\"id\":1}",
+      "1": "{\"password\":\"$2a$10$b4MOD1KPOGl84VVaq29i6u.eu22JUVN.CLNRYgMeuGWSbknGt3rr2\",\"name\":\"MWAHAHAHAHAHAHAHAHAHAH\",\"email\":\"testuser@abc.com\",\"address\":\"saigon\",\"id\":1}",
       "2": "{\"password\":\"customer222\",\"name\":\"Make sure there are no survivors left!\",\"email\":\"thuduc222@.com\",\"address\":\"thuduc\",\"id\":2}",
       "3": "{\"password\":\"customer333\",\"name\":\"Become the very best!\",\"email\":\"quan9333@.com\",\"address\":\"quan9\",\"id\":3}",
       "4": "{\"password\":\"customer444\",\"name\":\"Every.Last.One.\",\"email\":\"quan2444@.com\",\"address\":\"quan2\",\"id\":4}"
@@ -42,6 +44,12 @@
       "2": "{\"id\":2,\"customerId\":2}",
       "3": "{\"id\":3,\"customerId\":3}",
       "4": "{\"id\":4,\"customerId\":4}"
+    },
+    "User": {
+      "85d59dc0-135f-4244-a927-cd21fa521afa": "{\"id\":\"85d59dc0-135f-4244-a927-cd21fa521afa\",\"email\":\"testuser@abc.com\"}"
+    },
+    "UserCredentials": {
+      "441d060a-dca9-41cb-9773-9e5d7e4a7e30": "{\"id\":\"441d060a-dca9-41cb-9773-9e5d7e4a7e30\",\"password\":\"$2a$10$b4MOD1KPOGl84VVaq29i6u.eu22JUVN.CLNRYgMeuGWSbknGt3rr2\",\"userId\":\"85d59dc0-135f-4244-a927-cd21fa521afa\"}"
     }
   }
 }
