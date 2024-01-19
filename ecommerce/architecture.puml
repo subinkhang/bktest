@@ -1,0 +1,52 @@
+@startuml
+
+title System architecture diagram
+
+package "GitHub" {
+  package "Repositories" {
+    node "Frontend repository"
+    node "Backend repository"
+  }
+  node "GitHub Actions"
+  node "GitHub Secrets"
+}
+
+package "Frontend" {
+  [Web application]
+}
+
+package "Backend" {
+  [API]
+}
+
+package "Heroku" {
+  [Heroku platform]
+  [Heroku server]
+}
+
+package "Deployment" {
+  [Development server]
+  [Production server]
+}
+
+package "Database" {
+  database "Development MongoDB Atlas cluster"
+  database "Production MongoDB Atlas cluster"
+}
+
+[Web application] --> [API]
+[API] --> [Development MongoDB Atlas cluster]
+[API] --> [Production MongoDB Atlas cluster]
+[Development server] --> [API]
+[Production server] --> [API]
+
+[Heroku server] --> [Development server]
+[Heroku server] --> [Production server]
+[Heroku platform] --> [Heroku server]
+
+[GitHub Actions] --> [Frontend repository]
+[GitHub Actions] --> [Backend repository]
+[GitHub Secrets] --> [GitHub Actions]
+[GitHub Actions] --> [Heroku platform]
+
+@enduml

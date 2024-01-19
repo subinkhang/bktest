@@ -1,0 +1,26 @@
+@startuml
+
+title Synchronize product's data
+
+actor App
+participant ThirdPartyAPI
+participant Database
+participant Scheduler
+
+Scheduler -> App: Trigger sync
+
+App -> ThirdPartyAPI: Request product data
+ThirdPartyAPI --> App: Return product data
+
+alt Data not exists
+App -> Database: Create new product
+Database --> App: Success
+end
+
+alt Data exists
+App -> Database: Merge product data
+Database --> App: Success
+end
+
+
+@enduml
