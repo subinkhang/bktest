@@ -57,3 +57,13 @@ export interface CustomerRelations {
 }
 
 export type CustomerWithRelations = Customer & CustomerRelations;
+
+@model()
+export class CustomerWithPassword extends Customer {
+  @property({
+    type: 'string',
+    required: true,
+  })
+  password: string;
+}
+

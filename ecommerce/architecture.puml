@@ -1,0 +1,40 @@
+@startuml
+
+title System architecture diagram
+
+package "Frontend" {
+  [Web application]
+}
+
+package "Backend" {
+  [API]
+  [Database]
+}
+
+package "Deployment" {
+  [Development server]
+  [Production server]
+}
+
+[Web application] --> [API]
+[API] --> [Database]
+
+[Development server] --> [Database]
+[Production server] --> [Database]
+
+database "Database" {
+  [Product]
+  [Transaction]
+  [Billing]
+  [Customer]
+  [Agency]
+}
+
+[Product] "1" -- "many" [Transaction]
+[Product] "1" -- "many" [Agency]
+[Customer] "1" -- "many" [Transaction]
+[Customer] "1" -- "many" [Billing]
+[Agency] "1" -- "many" [Transaction]
+[Agency] "1" -- "many" [Billing]
+
+@enduml
