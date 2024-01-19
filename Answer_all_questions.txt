@@ -1,5 +1,5 @@
 
-TRẢ LỜI CÁC CÂU HỎI CHỮ, GỒM CÂU: 2.1 - 2.2 - 3.3
+TRẢ LỜI CÁC CÂU HỎI, GỒM CÂU: 2.1 - 2.2 - 3.3 - 4.2
 
 ================== Câu 2.1 với erd được vẽ ở câu hỏi 1, bạn đang sử dụng database nào để triển khai? ===============================================
 - Sử dụng database in-memory NeDB để triển khai ứng dụng (dựa trên file src/datasource/db.datasource.ts)
@@ -33,8 +33,23 @@ TRẢ LỜI CÁC CÂU HỎI CHỮ, GỒM CÂU: 2.1 - 2.2 - 3.3
 
 -> Điểm yếu:
     - Cách triển khai này có thể không phù hợp với các ứng dụng yêu cầu tính bảo mật cao.
-    - Không phù hợp với các ứng dụng yêu cầu hiệu suất cao vì sử dụng token xác thực: Token xác thực là một chuỗi băm được sử dụng để xác minh người dùng. Quá trình tạo và xác minh token xác thực có thể gây ra độ trễ nhất định
+    - Không phù hợp với các ứng dụng yêu cầu hiệu suất cao vì sử dụng token xác thực: Token xác thực là một chuỗi băm được 
+        sử dụng để xác minh người dùng. Quá trình tạo và xác minh token xác thực có thể gây ra độ trễ nhất định
 
 -> Cách cải thiện:
     - Sử dụng các phương pháp mã hóa token xác thực mạnh hơn.
     - Để cải thiện hiệu suất, có thể sử dụng các kỹ thuật caching và optimization.
+
+================== Câu 4.2 điểm mạnh, điểm yếu, cách cải thiện của giải pháp lưu, merge dữ liệu sản phẩm từ third-party API vào database ==================
+-> Điểm mạnh:
+    - Sử dụng Scheduler để kích hoạt việc đồng bộ hóa dữ liệu theo lịch trình, giúp đảm bảo dữ liệu sản phẩm trong ứng dụng luôn được cập nhật theo thời gian thực.
+    - Sử dụng phương thức merge dữ liệu để cập nhật dữ liệu sản phẩm đã tồn tại trong database, giúp giảm thiểu nguy cơ xung đột dữ liệu và cải thiện hiệu suất.
+
+-> Điểm yếu:
+    - Vì chỉ lưu dữ liệu sản phẩm mới vào database, nên có thể gây ra thiếu sót dữ liệu nếu có dữ liệu sản phẩm đã tồn tại trong third-party API nhưng không có trong database.
+    - Giải pháp này không có cơ chế nào để xử lý các trường hợp ngoại lệ như lỗi mạng, lỗi hệ thống, hoặc lỗi từ third-party API,...
+
+-> Cách cải thiện:
+    - Để khắc phục điểm yếu đầu tiên, có thể bổ sung thêm trường last_sync_timestamp vào mô hình sản phẩm trong database. Trường 
+        này sẽ lưu trữ thời gian đồng bộ hóa dữ liệu sản phẩm lần cuối. Khi thực hiện đồng bộ hóa dữ liệu, có thể kiểm tra 
+        trường last_sync_timestamp để xác định xem dữ liệu sản phẩm đã tồn tại trong database có cần được cập nhật hay không.
