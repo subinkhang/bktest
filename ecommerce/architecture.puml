@@ -2,13 +2,26 @@
 
 title System architecture diagram
 
+package "GitHub" {
+  package "Repositories" {
+    node "Frontend repository"
+    node "Backend repository"
+  }
+  node "GitHub Actions"
+  node "GitHub Secrets"
+}
+
 package "Frontend" {
   [Web application]
 }
 
 package "Backend" {
   [API]
-  [Database]
+}
+
+package "Heroku" {
+  [Heroku platform]
+  [Heroku server]
 }
 
 package "Deployment" {
@@ -16,25 +29,24 @@ package "Deployment" {
   [Production server]
 }
 
-[Web application] --> [API]
-[API] --> [Database]
-
-[Development server] --> [Database]
-[Production server] --> [Database]
-
-database "Database" {
-  [Product]
-  [Transaction]
-  [Billing]
-  [Customer]
-  [Agency]
+package "Database" {
+  database "Development MongoDB Atlas cluster"
+  database "Production MongoDB Atlas cluster"
 }
 
-[Product] "1" -- "many" [Transaction]
-[Product] "1" -- "many" [Agency]
-[Customer] "1" -- "many" [Transaction]
-[Customer] "1" -- "many" [Billing]
-[Agency] "1" -- "many" [Transaction]
-[Agency] "1" -- "many" [Billing]
+[Web application] --> [API]
+[API] --> [Development MongoDB Atlas cluster]
+[API] --> [Production MongoDB Atlas cluster]
+[Development server] --> [API]
+[Production server] --> [API]
+
+[Heroku server] --> [Development server]
+[Heroku server] --> [Production server]
+[Heroku platform] --> [Heroku server]
+
+[GitHub Actions] --> [Frontend repository]
+[GitHub Actions] --> [Backend repository]
+[GitHub Secrets] --> [GitHub Actions]
+[GitHub Actions] --> [Heroku platform]
 
 @enduml
